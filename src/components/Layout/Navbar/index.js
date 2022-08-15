@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import { AuthContext } from "../pages/context/AuthContext";
-import Checkbox from "../components/core/common/Checkbox";
-import InputText from "./core/common/InputText";
+import { AuthContext } from "../../../pages/context/AuthContext";
+import Checkbox from "../../core/common/Checkbox";
+import InputText from "../../core/common/InputText";
 
 import {
   BaseIcon,
@@ -16,7 +16,7 @@ import {
   TextSearchIcon,
   CharacterSearchIcon,
   LocationSearchIcon,
-} from "./Svg";
+} from "../../Svg";
 
 const MainMenu = [
   {

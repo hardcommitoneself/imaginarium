@@ -1,13 +1,15 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+//call hook
 import { ProjectContext } from "../../../pages/context/ProjectContext";
-
+//core component
+import Checkbox from "../common/Checkbox";
+//json data
+import { projects } from "./data/projects";
+//svg
 import { DetailIcon, DropDownIcon } from "../../Svg";
 
-import Checkbox from "../common/Checkbox";
-import { projects } from "../data/projects";
-
-export default function Table(props) {
+export default function DashboardTable(props) {
   const { selected, setSelected } = React.useContext(ProjectContext);
   const [showExportModal, setshowExportModal] = React.useState(false);
   const [projectType, setProjectType] = React.useState(
@@ -19,8 +21,192 @@ export default function Table(props) {
   const [checkedDelete, setCheckedDelete] = React.useState(false);
   const [checkedLeave, setCheckedLeave] = React.useState(false);
   const [id, setId] = React.useState();
+  const [filteredProjects, setFilteredProjects] = React.useState([]);
 
   React.useEffect(() => setSelected("Recent"), [setSelected]);
+
+  React.useEffect(() => {
+    setFilteredProjects(
+      selected === "Recent"
+        ? projects
+        : projects.filter((project) => project.project_type === selected)
+    );
+  }, [selected]);
+
+  const filteredProjectsMemo = React.useMemo(() => {
+    return filteredProjects.map((project, index) => (
+      <div className="collapse !overflow-visible" key={index}>
+        <input type="checkbox" className="!w-[88%] !p-0" />
+        <div className="collapse-title text-xl font-medium p-0">
+          <TableBodyRow no={project.project_id}>
+            <TableCol className="flex flex-row items-center px-4 w-1/4">
+              <img
+                src={project.project_image}
+                alt={project.project_id}
+                width={40}
+                height={40}
+              />
+              <span className="ml-4 text-[18px] leading-6 text-white">
+                {project.project_name}
+              </span>
+            </TableCol>
+            <TableCol className="flex flex-row items-center w-1/15">
+              {project.project_type_icon}
+              <span className="leading-5 ml-3 text-[14px] leading-5 text-white">
+                {project.project_type}
+              </span>
+            </TableCol>
+            <TableCol className="flex flex-col w-1/15">
+              <span className="text-white text-[12px] leading-none">
+                {project.project_content}
+              </span>
+              {`${project.project_type}` === "Movie" ? (
+                <div className="mt-1">
+                  <Progressbar width={project.project_progress}>
+                    {project.project_progress}
+                  </Progressbar>
+                </div>
+              ) : null}
+            </TableCol>
+            <TableCol className="flex flex-row w-[13%]">
+              <label className="text-[14px] leading-5 text-white">
+                {project.project_opened}
+              </label>
+            </TableCol>
+            <TableCol className="flex flex-row w-[10%] text-[14px] leading-5">
+              <label
+                className={
+                  `${project.project_author}` === "You"
+                    ? "text-white"
+                    : "text-[#1DAEFF]"
+                }
+              >
+                {project.project_author}
+              </label>
+            </TableCol>
+            <TableCol className="flex flex-row flex-wrap w-[10%]">
+              {project.project_collaborators.map(
+                (project_collaborator, index) => (
+                  <img
+                    key={index}
+                    className="w-8 h-8 rounded-[24px] mr-2 mb-2"
+                    src={project_collaborator.src}
+                    alt={project_collaborator.alt}
+                    width={20}
+                    height={20}
+                  />
+                )
+              )}
+              {typeof project.projects_collaborators_count === "number" ? (
+                <div className="w-8 h-8 rounded-[24px] bg-[#161616] border border-[#2B2B2B] flex items-center justify-center">
+                  <label className="text-[9px] text-[#CDCDCD] leading-5 font-extrabold tracking-[.1em]">
+                    +{project.projects_collaborators_count}
+                  </label>
+                </div>
+              ) : null}
+            </TableCol>
+            <TableCol className="flex flex-row justify-evenly w-[12%]">
+              <Link to="/workspace">
+                <button className="ring-1 ring-gray-500 w-20 h-8 text-[10px] text-white rounded leading-5 tracking-[.21em] hover:bg-[#404040] outline-none">
+                  OPEN
+                </button>
+              </Link>
+              <div className="dropdown dropdown-end h-[32px]">
+                <button tabIndex="0">
+                  <DetailIcon className="hover:bg-[#404040] cursor-pointer" />
+                </button>
+                {`${project.project_own}` === "true" ? (
+                  <ul
+                    tabIndex="0"
+                    className="z-20 drop-shadow-[0_15px_15px_rgba(255,255,255,0.2)] menu menu-compact dropdown-content mr-3 shadow bg-[#161616] border border-[#464646] w-[148px] h-32 mt-0 rounded-[4px] cursor-pointer"
+                  >
+                    <Link
+                      className="flex flex-row px-2 py-1.5 h-8 border-b border-[#464646] hover:bg-[#5D5D5D] cursor-pointer"
+                      to="/edit-project"
+                    >
+                      <img
+                        className="p-0 w-5 h-5 cursor-pointer"
+                        src="assets/img/dashboard/edit.png"
+                        alt="edit"
+                      />
+                      <label className="p-0 ml-2 text-[9px] font-extrabold text-white leading-5 tracking-[.21em] cursor-pointer">
+                        EDIT
+                      </label>
+                    </Link>
+                    <button
+                      className="flex flex-row px-2 py-1.5 h-8 border-b border-[#464646] hover:bg-[#5D5D5D] cursor-pointer"
+                      onClick={() => {
+                        setshowExportModal(true);
+                      }}
+                    >
+                      <img
+                        className="p-0 w-5 h-5 cursor-pointer"
+                        src="assets/img/dashboard/export.png"
+                        alt="export"
+                      />
+                      <label className="p-0 ml-2 text-[9px] font-extrabold text-white leading-5 tracking-[.21em] cursor-pointer">
+                        EXPORT
+                      </label>
+                    </button>
+                    <button className="flex flex-row px-2 py-1.5 h-8 border-b border-[#464646] hover:bg-[#5D5D5D] cursor-pointer">
+                      <img
+                        className="p-0 w-5 h-5 !active:bg-[#5D5D5D] cursor-pointer"
+                        src="assets/img/dashboard/share.png"
+                        alt="share"
+                      />
+                      <label className="!active:bg-[#5D5D5D] p-0 ml-2 text-[9px] font-extrabold text-white leading-5 tracking-[.21em] cursor-pointer">
+                        SHARE OPTIONS
+                      </label>
+                    </button>
+                    <button
+                      className="flex flex-row px-2 py-1.5 h-8 hover:bg-[#5D5D5D] cursor-pointer"
+                      onClick={() => {
+                        setShowDeleteModal(true);
+                        setId(`${project.project_id}`);
+                      }}
+                    >
+                      <img
+                        className="p-0 w-5 h-5 cursor-pointer"
+                        src="assets/img/dashboard/trash-2.png"
+                        alt="trash"
+                      />
+                      <label className="p-0 ml-2 text-[9px] font-extrabold text-white leading-5 tracking-[.21em] cursor-pointer">
+                        DELETE
+                      </label>
+                    </button>
+                  </ul>
+                ) : (
+                  <ul
+                    tabIndex="0"
+                    className="drop-shadow-[0_15px_15px_rgba(255,255,255,0.2)] menu menu-compact dropdown-content mr-3 shadow bg-[#161616] border border-[#464646] w-[148px] h-8 mt-0 rounded-[4px]"
+                  >
+                    <button
+                      className="flex flex-row px-2 py-1.5 h-8 hover:bg-[#5D5D5D]"
+                      onClick={() => {
+                        setShowLeaveModal(true);
+                      }}
+                    >
+                      <img
+                        className="p-0 w-5 h-5"
+                        src="assets/img/dashboard/log-out.png"
+                        alt="leave"
+                      />
+                      <label className="p-0 ml-2 text-[9px] font-extrabold text-[#DD5E5E] leading-5 tracking-[.21em]">
+                        LEAVE PROJECT
+                      </label>
+                    </button>
+                  </ul>
+                )}
+              </div>
+            </TableCol>
+          </TableBodyRow>
+        </div>
+        <div className="collapse-content">
+          <ProjectDetail />
+        </div>
+      </div>
+    ));
+  }, [filteredProjects]);
 
   return (
     <div className="w-full h-full scrollbar-hide md:scrollbar-default">
@@ -32,365 +218,9 @@ export default function Table(props) {
           <TableCol className="w-[13%]">LASTOPENED</TableCol>
           <TableCol className="w-[11%]">AUTHOR</TableCol>
           <TableCol className="w-1/10">COLLABORATORS</TableCol>
-          
         </TableHeaderRow>
       </TableHeader>
-      {selected === "Recent" ? (
-        <>
-          {projects.map((project, index) => (
-            <div className="collapse !overflow-visible" key={index}>
-              <input type="checkbox" className="!w-[88%] !p-0" />
-              <div className="collapse-title text-xl font-medium p-0">
-                <TableBodyRow no={project.project_id}>
-                  <TableCol className="flex flex-row items-center px-4 w-1/4">
-                    <img
-                      src={project.project_image}
-                      alt={project.project_id}
-                      width={40}
-                      height={40}
-                    />
-                    <span className="ml-4 text-[18px] leading-6 text-white">
-                      {project.project_name}
-                    </span>
-                  </TableCol>
-                  <TableCol className="flex flex-row items-center w-1/15">
-                    {project.project_type_icon}
-                    <span className="leading-5 ml-3 text-[14px] leading-5 text-white">
-                      {project.project_type}
-                    </span>
-                  </TableCol>
-                  <TableCol className="flex flex-col w-1/15">
-                    <span className="text-white text-[12px] leading-none">
-                      {project.project_content}
-                    </span>
-                    {`${project.project_type}` === "Movie" ? (
-                      <div className="mt-1">
-                        <Progressbar width={project.project_progress}>
-                          {project.project_progress}
-                        </Progressbar>
-                      </div>
-                    ) : null}
-                  </TableCol>
-                  <TableCol className="flex flex-row w-[13%]">
-                    <label className="text-[14px] leading-5 text-white">
-                      {project.project_opened}
-                    </label>
-                  </TableCol>
-                  <TableCol className="flex flex-row w-[10%] text-[14px] leading-5">
-                    <label
-                      className={
-                        `${project.project_author}` === "You"
-                          ? "text-white"
-                          : "text-[#1DAEFF]"
-                      }
-                    >
-                      {project.project_author}
-                    </label>
-                  </TableCol>
-                  <TableCol className="flex flex-row flex-wrap w-[10%]">
-                    {project.project_collaborators.map(
-                      (project_collaborator, index) => (
-                        <img
-                          key={index}
-                          className="w-8 h-8 rounded-[24px] mr-2 mb-2"
-                          src={project_collaborator.src}
-                          alt={project_collaborator.alt}
-                          width={20}
-                          height={20}
-                        />
-                      )
-                    )}
-                    {typeof project.projects_collaborators_count ===
-                    "number" ? (
-                      <div className="w-8 h-8 rounded-[24px] bg-[#161616] border border-[#2B2B2B] flex items-center justify-center">
-                        <label className="text-[9px] text-[#CDCDCD] leading-5 font-extrabold tracking-[.1em]">
-                          +{project.projects_collaborators_count}
-                        </label>
-                      </div>
-                    ) : null}
-                  </TableCol>
-                  <TableCol className="flex flex-row justify-evenly w-[12%]">
-                    <Link to="/workspace">
-                      <button className="ring-1 ring-gray-500 w-20 h-8 text-[10px] text-white rounded leading-5 tracking-[.21em] hover:bg-[#404040] outline-none">
-                        OPEN
-                      </button>
-                    </Link>
-                    <div className="dropdown dropdown-end h-[32px]">
-                      <button tabIndex="0">
-                        <DetailIcon className="hover:bg-[#404040] cursor-pointer" />
-                      </button>
-                      {`${project.project_own}` === "true" ? (
-                        <ul
-                          tabIndex="0"
-                          className="z-20 drop-shadow-[0_15px_15px_rgba(255,255,255,0.2)] menu menu-compact dropdown-content mr-3 shadow bg-[#161616] border border-[#464646] w-[148px] h-32 mt-0 rounded-[4px] cursor-pointer"
-                        >
-                          <Link
-                            className="flex flex-row px-2 py-1.5 h-8 border-b border-[#464646] hover:bg-[#5D5D5D] cursor-pointer"
-                            to="/edit-project"
-                          >
-                            <img
-                              className="p-0 w-5 h-5 cursor-pointer"
-                              src="assets/img/dashboard/edit.png"
-                              alt="edit"
-                            />
-                            <label className="p-0 ml-2 text-[9px] font-extrabold text-white leading-5 tracking-[.21em] cursor-pointer">
-                              EDIT
-                            </label>
-                          </Link>
-                          <button
-                            className="flex flex-row px-2 py-1.5 h-8 border-b border-[#464646] hover:bg-[#5D5D5D] cursor-pointer"
-                            onClick={() => {
-                              setshowExportModal(true);
-                            }}
-                          >
-                            <img
-                              className="p-0 w-5 h-5 cursor-pointer"
-                              src="assets/img/dashboard/export.png"
-                              alt="export"
-                            />
-                            <label className="p-0 ml-2 text-[9px] font-extrabold text-white leading-5 tracking-[.21em] cursor-pointer">
-                              EXPORT
-                            </label>
-                          </button>
-                          <button className="flex flex-row px-2 py-1.5 h-8 border-b border-[#464646] hover:bg-[#5D5D5D] cursor-pointer">
-                            <img
-                              className="p-0 w-5 h-5 !active:bg-[#5D5D5D] cursor-pointer"
-                              src="assets/img/dashboard/share.png"
-                              alt="share"
-                            />
-                            <label className="!active:bg-[#5D5D5D] p-0 ml-2 text-[9px] font-extrabold text-white leading-5 tracking-[.21em] cursor-pointer">
-                              SHARE OPTIONS
-                            </label>
-                          </button>
-                          <button
-                            className="flex flex-row px-2 py-1.5 h-8 hover:bg-[#5D5D5D] cursor-pointer"
-                            onClick={() => {
-                              setShowDeleteModal(true);
-                              setId(`${project.project_id}`);
-                            }}
-                          >
-                            <img
-                              className="p-0 w-5 h-5 cursor-pointer"
-                              src="assets/img/dashboard/trash-2.png"
-                              alt="trash"
-                            />
-                            <label className="p-0 ml-2 text-[9px] font-extrabold text-white leading-5 tracking-[.21em] cursor-pointer">
-                              DELETE
-                            </label>
-                          </button>
-                        </ul>
-                      ) : (
-                        <ul
-                          tabIndex="0"
-                          className="drop-shadow-[0_15px_15px_rgba(255,255,255,0.2)] menu menu-compact dropdown-content mr-3 shadow bg-[#161616] border border-[#464646] w-[148px] h-8 mt-0 rounded-[4px]"
-                        >
-                          <button
-                            className="flex flex-row px-2 py-1.5 h-8 hover:bg-[#5D5D5D]"
-                            onClick={() => {
-                              setShowLeaveModal(true);
-                            }}
-                          >
-                            <img
-                              className="p-0 w-5 h-5"
-                              src="assets/img/dashboard/log-out.png"
-                              alt="leave"
-                            />
-                            <label className="p-0 ml-2 text-[9px] font-extrabold text-[#DD5E5E] leading-5 tracking-[.21em]">
-                              LEAVE PROJECT
-                            </label>
-                          </button>
-                        </ul>
-                      )}
-                    </div>
-                  </TableCol>
-                </TableBodyRow>
-              </div>
-              <div className="collapse-content">
-                <ProjectDetail />
-              </div>
-            </div>
-          ))}
-        </>
-      ) : (
-        <>
-          {projects
-            .filter((project, index) => project.project_type === selected)
-            .map((project, index) => (
-              <div className="collapse !overflow-visible" key={index}>
-                <input type="checkbox" className="!w-[88%] !p-0" />
-                <div className="collapse-title text-xl font-medium p-0">
-                  <TableBodyRow no={project.project_id}>
-                    <TableCol className="flex flex-row items-center px-4 w-1/4">
-                      <img
-                        src={project.project_image}
-                        alt={project.project_id}
-                        width={40}
-                        height={40}
-                      />
-                      <span className="ml-4 text-[18px] leading-6 text-white">
-                        {project.project_name}
-                      </span>
-                    </TableCol>
-                    <TableCol className="flex flex-row items-center w-1/15">
-                      {project.project_type_icon}
-                      <span className="leading-5 ml-3 text-[14px] leading-5 text-white">
-                        {project.project_type}
-                      </span>
-                    </TableCol>
-                    <TableCol className="flex flex-col w-1/15">
-                      <span className="text-white text-[12px] leading-none">
-                        {project.project_content}
-                      </span>
-                      {`${project.project_type}` === "Movie" ? (
-                        <div className="mt-1">
-                          <Progressbar width={project.project_progress}>
-                            {project.project_progress}
-                          </Progressbar>
-                        </div>
-                      ) : null}
-                    </TableCol>
-                    <TableCol className="flex flex-row w-[13%]">
-                      <label className="text-[14px] leading-5 text-white">
-                        {project.project_opened}
-                      </label>
-                    </TableCol>
-                    <TableCol className="flex flex-row w-[10%] text-[14px] leading-5">
-                      <label
-                        className={
-                          `${project.project_author}` === "You"
-                            ? "text-white"
-                            : "text-[#1DAEFF]"
-                        }
-                      >
-                        {project.project_author}
-                      </label>
-                    </TableCol>
-                    <TableCol className="flex flex-row flex-wrap w-[10%]">
-                      {project.project_collaborators.map(
-                        (project_collaborator, index) => (
-                          <img
-                            key={index}
-                            className="w-8 h-8 rounded-[24px] mr-2 mb-2"
-                            src={project_collaborator.src}
-                            alt={project_collaborator.alt}
-                            width={20}
-                            height={20}
-                          />
-                        )
-                      )}
-                      {typeof project.projects_collaborators_count ===
-                      "number" ? (
-                        <div className="w-8 h-8 rounded-[24px] bg-[#161616] border border-[#2B2B2B] flex items-center justify-center">
-                          <label className="text-[9px] text-[#CDCDCD] leading-5 font-extrabold tracking-[.1em]">
-                            {project.projects_collaborators_count}
-                          </label>
-                        </div>
-                      ) : null}
-                    </TableCol>
-                    <TableCol className="flex flex-row justify-evenly w-[12%]">
-                      <Link to="/workspace">
-                        <button className="ring-1 ring-gray-500 w-20 h-8 text-[10px] text-white rounded leading-5 tracking-[.21em] hover:bg-[#404040] outline-none">
-                          OPEN
-                        </button>
-                      </Link>
-                      <div className="dropdown dropdown-end h-[32px]">
-                        <button tabIndex="0">
-                          <DetailIcon className="hover:bg-[#404040] cursor-pointer" />
-                        </button>
-                        {`${project.project_own}` === "true" ? (
-                          <ul
-                            tabIndex="0"
-                            className="z-20 drop-shadow-[0_15px_15px_rgba(255,255,255,0.2)] menu menu-compact dropdown-content mr-3 shadow bg-[#161616] border border-[#464646] w-[148px] h-32 mt-0 rounded-[4px] cursor-pointer"
-                          >
-                            <Link
-                              className="flex flex-row px-2 py-1.5 h-8 border-b border-[#464646] hover:bg-[#5D5D5D] cursor-pointer"
-                              to="/edit-project"
-                            >
-                              <img
-                                className="p-0 w-5 h-5 cursor-pointer"
-                                src="assets/img/dashboard/edit.png"
-                                alt="edit"
-                              />
-                              <label className="p-0 ml-2 text-[9px] font-extrabold text-white leading-5 tracking-[.21em] cursor-pointer">
-                                EDIT
-                              </label>
-                            </Link>
-                            <button
-                              className="flex flex-row px-2 py-1.5 h-8 border-b border-[#464646] hover:bg-[#5D5D5D] cursor-pointer"
-                              onClick={() => {
-                                setshowExportModal(true);
-                              }}
-                            >
-                              <img
-                                className="p-0 w-5 h-5 cursor-pointer"
-                                src="assets/img/dashboard/export.png"
-                                alt="export"
-                              />
-                              <label className="p-0 ml-2 text-[9px] font-extrabold text-white leading-5 tracking-[.21em] cursor-pointer">
-                                EXPORT
-                              </label>
-                            </button>
-                            <button className="flex flex-row px-2 py-1.5 h-8 border-b border-[#464646] hover:bg-[#5D5D5D] cursor-pointer">
-                              <img
-                                className="p-0 w-5 h-5 !active:bg-[#5D5D5D] cursor-pointer"
-                                src="assets/img/dashboard/share.png"
-                                alt="share"
-                              />
-                              <label className="!active:bg-[#5D5D5D] p-0 ml-2 text-[9px] font-extrabold text-white leading-5 tracking-[.21em] cursor-pointer">
-                                SHARE OPTIONS
-                              </label>
-                            </button>
-                            <button
-                              className="flex flex-row px-2 py-1.5 h-8 hover:bg-[#5D5D5D] cursor-pointer"
-                              onClick={() => {
-                                setShowDeleteModal(true);
-                                setId(`${project.project_id}`);
-                              }}
-                            >
-                              <img
-                                className="p-0 w-5 h-5 cursor-pointer"
-                                src="assets/img/dashboard/trash-2.png"
-                                alt="trash"
-                              />
-                              <label className="p-0 ml-2 text-[9px] font-extrabold text-white leading-5 tracking-[.21em] cursor-pointer">
-                                DELETE
-                              </label>
-                            </button>
-                          </ul>
-                        ) : (
-                          <ul
-                            tabIndex="0"
-                            className="drop-shadow-[0_15px_15px_rgba(255,255,255,0.2)] menu menu-compact dropdown-content mr-3 shadow bg-[#161616] border border-[#464646] w-[148px] h-8 mt-0 rounded-[4px]"
-                          >
-                            <button
-                              className="flex flex-row px-2 py-1.5 h-8 hover:bg-[#5D5D5D]"
-                              onClick={() => {
-                                setShowLeaveModal(true);
-                              }}
-                            >
-                              <img
-                                className="p-0 w-5 h-5"
-                                src="assets/img/dashboard/log-out.png"
-                                alt="leave"
-                              />
-                              <label className="p-0 ml-2 text-[9px] font-extrabold text-[#DD5E5E] leading-5 tracking-[.21em]">
-                                LEAVE PROJECT
-                              </label>
-                            </button>
-                          </ul>
-                        )}
-                      </div>
-                    </TableCol>
-                  </TableBodyRow>
-                </div>
-                <div className="collapse-content">
-                  <ProjectDetail />
-                </div>
-              </div>
-            ))}
-        </>
-      )}
-      ;
+      {filteredProjectsMemo}
       {showExportModal ? (
         <>
           <div className="drop-shadow-[0_15px_15px_rgba(255,255,255,0.2)] z-10 fixed flex flex-col top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-auto bg-[#2B2B2B] border border-[#161616] rounded-md">

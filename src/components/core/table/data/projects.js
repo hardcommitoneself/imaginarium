@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ProjectTypeMovie, ProjectTypeTv, ProjectTypeBook } from "../../Svg";
+import { ProjectTypeMovie, ProjectTypeTv, ProjectTypeBook } from "../../../Svg";
 
 export const projects = [
   {
