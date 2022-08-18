@@ -22,10 +22,12 @@ import {
   TimesIcon,
   DownloadRIghtIcon,
   SettingIcon,
+  MicIcon,
   MicOffIcon,
   CollapseIcon,
   AlertTriIcon,
   TalkIcon,
+  DropDownIcon
 } from "../../../Svg";
 
 export default function WorkSpaceNavbar() {
@@ -100,6 +102,7 @@ export default function WorkSpaceNavbar() {
   const [isOpenScript, setOpenScript] = React.useState(false);
   const [isOpenPage, setOpenPage] = React.useState(false);
   const [isHeaderPhoneModal, setHeaderPhoneModal] = React.useState(false);
+  const [isVoiceChatSettingModal, setVoiceChatSettingModal] = React.useState(false);
   const [isShareModal, setShareModal] = React.useState(false);
   const [columns, setColumns] = React.useState(CollabratorData);
   const [gmailVal, setGmailVal] = React.useState("stephenking@gmail.com");
@@ -109,6 +112,11 @@ export default function WorkSpaceNavbar() {
   const [projectForm, setProjectForm] = React.useState(
     "Microsoft Word (*.docx)"
   );
+  const [microVoiceChatForm, setMicroVoiceChatForm] = React.useState("Default - Speakers (Logitech PRO X Wirele...")
+  const [isOpenMircoVoiceChatForm, setOpenMicroVoiceChatForm] = React.useState(false)
+
+  const [speakerVoiceChatForm, setSpeakerVoiceChatForm] = React.useState("Default - Speakers (Logitech PRO X Wirele...")
+  const [isOpenSpeakerVoiceChatForm, setOpenSpeakerVoiceChatForm] = React.useState(false)
 
   const handleGmailVal = (val) => {
     setGmailVal(val);
@@ -301,9 +309,109 @@ export default function WorkSpaceNavbar() {
                       <button className="rounded w-8 h-8 bg-[#DD5E5E] flex items-center justify-center">
                         <MicOffIcon />
                       </button>
-                      <button className="border border-[#404040] rounded w-8 h-8 flex items-center justify-center">
-                        <SettingIcon />
-                      </button>
+                      <div className="dropdown w-8 h-8">
+                        <div tabIndex={1}
+                          onClick={() => {
+                            setVoiceChatSettingModal(!isVoiceChatSettingModal)
+                          }
+                          }>
+                          <button className="border border-[#404040] rounded w-8 h-8 flex items-center justify-center"
+                          >
+                            <SettingIcon />
+                          </button>
+                        </div>
+                        {isVoiceChatSettingModal && (
+                          <ul
+                            tabIndex={1}
+                            className="list-none mt-[176px] w-[332px] mr-[-124px] drop-shadow-[0_15px_15px_rgba(255,255,255,0.2)] dropdown-content shadow bg-[#161616] border border-[#161616] w-40 rounded-[4px]"
+                          >
+                            <div className="flex flex-row justify-between w-full h-12 pl-[24px] pr-[14px] py-[14px] bg-[#2B2B2B]">
+                              <p className="uppercase tracking-[.21em] text-white font-extrabold leading-5 text-[9px]">voice chat settings</p>
+                              <button
+                                className="hover:bg-[#4F4F4F]"
+                                onClick={() => {
+                                  setVoiceChatSettingModal(false);
+                                }}
+                              >
+                                <img
+                                  className="w-[20px] h-[20px]"
+                                  src="assets/img/dashboard/close.png"
+                                  alt="close"
+                                />
+                              </button>
+                            </div>
+                            <div className="w-full h-[92px] px-[24px] py-[16px] bg-[#2B2B2B] border-y border-[#161616]">
+                              <div className="flex flex-col">
+                                <div className="flex flex-row">
+                                  <MicIcon />
+                                  <p className="uppercase tracking-[.21em] text-white font-extrabold leading-5 text-[9px] px-2">Microphone</p>
+                                </div>
+                                <div className="pt-2 flex flex-row w-[290px] justify-between">
+                                  <div className="dropdown w-full">
+                                    <div
+                                      tabIndex={2}
+                                      className="pl-2 pr-1.5 py-1.5 h-8 bg-[#161616] border border-[#404040] rounded-[4px]"
+                                      name="chatforms"
+                                      id="chatforms"
+                                      onClick={() => {
+                                        setOpenMicroVoiceChatForm(!isOpenMircoVoiceChatForm);
+                                      }}
+                                    >
+                                      <div className="flex justify-between w-full">
+                                        <label className="font-normal text-center text-white text-[12px] leading-5">
+                                          {microVoiceChatForm}
+                                        </label>
+
+                                        <button>
+                                          <DropDownIcon />
+                                        </button>
+                                      </div>
+
+                                    </div>
+
+                                  </div>
+                                  {isOpenMircoVoiceChatForm && (
+                                    <ul
+                                      tabIndex="0"
+                                      className="drop-shadow-[0_15px_15px_rgba(255,255,255,0.2)] mt-3 shadow bg-[#161616] border border-[#464646] w-full h-24 rounded-[4px]"
+                                    >
+                                      <li
+                                        className="flex flex-row px-2 py-1.5 h-8 text-center text-white text-[12px] leading-5 border-b border-[#464646] hover:bg-[#5D5D5D]"
+                                        onClick={() => {
+                                          setMicroVoiceChatForm("Default - Speakers (Logitech PRO X Wirele...");
+                                          setOpenMicroVoiceChatForm(false);
+                                        }}
+                                      >
+                                        Default - Microphone (Logitech PRO X Wireless)
+                                      </li>
+                                      <li
+                                        className="flex flex-row px-2 py-1.5 h-8 text-center text-white text-[12px] leading-5 border-b border-[#464646] hover:bg-[#5D5D5D]"
+                                        onClick={() => {
+                                          setMicroVoiceChatForm("Communications - Microphone (Logitech ...");
+                                          setOpenMicroVoiceChatForm(false);
+                                        }}
+                                      >
+                                        Communications - Microphone (Logitech PRO X...
+                                      </li>
+                                      <li
+                                        className="flex flex-row px-2 py-1.5 h-8 text-center text-white text-[12px] leading-5 border-b border-[#464646] hover:bg-[#5D5D5D]"
+                                        onClick={() => {
+                                          setMicroVoiceChatForm("Microphone (Logitech c922 webcam)");
+                                          setOpenMicroVoiceChatForm(false);
+                                        }}
+                                      >
+                                        Microphone (Logitech c922 webcam)
+                                      </li>
+                                    </ul>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+
+                          </ul>
+                        )}
+                      </div>
+
                       <button className="border border-[#404040] rounded w-8 h-8 flex items-center justify-center">
                         <DownloadRIghtIcon />
                       </button>
