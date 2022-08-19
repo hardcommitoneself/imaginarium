@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 // core components
-import InputText from "../components/core/common/InputText";
+import InputText from "../../components/core/common/InputText";
 
 export default function ResetEmail() {
   return (

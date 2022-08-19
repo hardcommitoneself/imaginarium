@@ -6,17 +6,17 @@ import "./App.css";
 import { AuthContext } from "./pages/context/AuthContext";
 import { ProjectContext } from "./pages/context/ProjectContext";
 
-import Onboard from "./pages/onboard";
-import Login from "./pages/login";
-import Register from "./pages/register";
-import ResetEmail from "./pages/resetemail";
-import ResetPassword from "./pages/resetpassword";
+import Onboard from "./pages/Onboard/onboard";
+import Login from "./pages/Auth/login";
+import Register from "./pages/Auth/register";
+import ResetEmail from "./pages/Auth/resetemail";
+import ResetPassword from "./pages/Auth/resetpassword";
 import Layout from "./components/Layout";
-import Dashboard from "./pages/dashboard";
-import NewProject from "./pages/newproject";
-import EditProject from "./pages/editproject";
-// import Profile from "./pages/profile";
-import Workspace from "./pages/workspace";
+import Dashboard from "./pages/Dashboard/dashboard";
+import NewProject from "./pages/Project/newproject";
+import EditProject from "./pages/Project/editproject";
+import Profile from "./pages/User/profile";
+import Workspace from "./pages/Workspace/workspace";
 
 function App() {
   let routes = useRoutes([
@@ -26,9 +26,9 @@ function App() {
     { path: "/reset-email", element: <ResetEmail /> },
     { path: "/reset-password", element: <ResetPassword /> },
     { path: "/dashboard", element: <Dashboard /> },
-    { path: "/new-project", element: <NewProject /> },
-    { path: "/edit-project", element: <EditProject /> },
-    // { path: "/profile", element: <Profile /> },
+    { path: "/project/new", element: <NewProject /> },
+    { path: "/project/edit", element: <EditProject /> },
+    { path: "/profile", element: <Profile /> },
     { path: "/workspace", element: <Workspace /> },
   ]);
   return routes;

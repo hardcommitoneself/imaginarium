@@ -1,17 +1,17 @@
 import * as React from "react";
 // core components
-import InputText from "../components/core/common/InputText";
-import Genres from "../components/core/chip/Genres";
-import Tag from "../components/core/chip/Tag";
-import DreamCast from "../components/core/chip/DreamCast";
-import SimilarMovie from "../components/core/chip/SimilarMovie";
+import InputText from "../../components/core/common/InputText";
+import Genres from "../../components/core/chip/Genres";
+import Tag from "../../components/core/chip/Tag";
+import DreamCast from "../../components/core/chip/DreamCast";
+import SimilarMovie from "../../components/core/chip/SimilarMovie";
 
 import {
   BigPlusButtonIcon,
   DropDownIcon,
   SmallPlusButtonIcon,
   LoglinePlusIcon,
-} from "../components/Svg";
+} from "../../components/Svg";
 
 export default function EditProject() {
   const [projectType, setProjectType] = React.useState(1);

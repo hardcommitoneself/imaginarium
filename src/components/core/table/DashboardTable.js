@@ -122,7 +122,7 @@ export default function DashboardTable(props) {
                   >
                     <Link
                       className="flex flex-row px-2 py-1.5 h-8 border-b border-[#464646] hover:bg-[#5D5D5D] cursor-pointer"
-                      to="/edit-project"
+                      to="/project/edit"
                     >
                       <img
                         className="p-0 w-5 h-5 cursor-pointer"

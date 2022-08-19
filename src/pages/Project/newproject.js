@@ -5,9 +5,9 @@ import {
   SmallPlusButtonIcon,
   BigPlusButtonIcon,
   LoglinePlusIcon,
-} from "../components/Svg";
+} from "../../components/Svg";
 // core components
-import InputText from "../components/core/common/InputText";
+import InputText from "../../components/core/common/InputText";
 
 export default function NewProject() {
   const [projectName, setProjectName] = React.useState("");

@@ -1,8 +1,8 @@
 import * as React from "react";
 
 // core components
-import DashboardTable from "../components/core/table/DashboardTable";
-import Checkbox from "../components/core/common/Checkbox";
+import DashboardTable from "../../components/core/table/DashboardTable";
+import Checkbox from "../../components/core/common/Checkbox";
 
 export default function Dashboard() {
   const [showModal, setShowModal] = React.useState();
