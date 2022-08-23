@@ -144,7 +144,7 @@ export default function Onboard() {
           />
         </div>
         <div className="absolute flex flex-row bottom-20 w-full pl-20 pr-20 justify-between">
-          <label className="flex flex-start w-2/3 font-extrabold text-[40px] w-1/2 text-white leading-snug">
+          <label className="flex flex-start font-extrabold text-[40px] w-1/2 text-white leading-snug">
             So... Go On! Tell Yours!
           </label>
         </div>
