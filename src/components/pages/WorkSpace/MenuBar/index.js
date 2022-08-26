@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { MenuData } from "./MenuData";
 import { RenderTree } from "./RenderTree";
 import { values } from "lodash";
-// import {Toogle} from ".Toogle"
-import { FileMenu, FileText, MsgSquare, ChevronUp } from "../../../Svg";
-import SlidingPane from "react-sliding-pane";
-import InputText from "../../../core/common/InputText";
+import { FileMenu, FileText, MsgSquare } from "../../../Svg";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 
 export const MenuBar = () => {
