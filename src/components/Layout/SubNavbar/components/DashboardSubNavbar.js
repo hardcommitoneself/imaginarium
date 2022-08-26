@@ -40,7 +40,7 @@ export default function DashboardSubNavbar() {
         >
           <button
             className={
-              "!inline-flex flex flex-row p-4 space-x-2 h-full cursor-pointer hover:bg-[#1F1F1F] focus:bg-black-rgba outline-none	" +
+              "!inline-flex flex-row p-4 space-x-2 h-full cursor-pointer hover:bg-[#1F1F1F] focus:bg-black-rgba outline-none	" +
               +(projectType === 1 ? "active" : null)
             }
             onClick={() => {
@@ -53,7 +53,7 @@ export default function DashboardSubNavbar() {
           </button>
           <button
             className={
-              "!inline-flex flex flex-row p-4 space-x-2 h-full cursor-pointer hover:bg-[#1F1F1F] focus:bg-black-rgba outline-none " +
+              "!inline-flex flex-row p-4 space-x-2 h-full cursor-pointer hover:bg-[#1F1F1F] focus:bg-black-rgba outline-none " +
               (projectType === 2 ? "active" : null)
             }
             onClick={() => {
@@ -66,7 +66,7 @@ export default function DashboardSubNavbar() {
           </button>
           <button
             className={
-              "!inline-flex flex flex-row p-4 space-x-2 h-full cursor-pointer hover:bg-[#1F1F1F] focus:bg-black-rgba outline-none " +
+              "!inline-flex flex-row p-4 space-x-2 h-full cursor-pointer hover:bg-[#1F1F1F] focus:bg-black-rgba outline-none " +
               (projectType === 3 ? "active" : null)
             }
             onClick={() => {
@@ -79,7 +79,7 @@ export default function DashboardSubNavbar() {
           </button>
           <button
             className={
-              "!inline-flex flex flex-row p-4 space-x-2 h-full cursor-pointer hover:bg-[#1F1F1F] focus:bg-black-rgba outline-none " +
+              "!inline-flex flex-row p-4 space-x-2 h-full cursor-pointer hover:bg-[#1F1F1F] focus:bg-black-rgba outline-none " +
               (projectType === 4 ? "active" : null)
             }
             onClick={() => {

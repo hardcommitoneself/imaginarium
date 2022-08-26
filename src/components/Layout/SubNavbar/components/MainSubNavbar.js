@@ -14,7 +14,7 @@ export default function MainSubNavbar() {
       <div className="dropdown">
         <div
           tabIndex="0"
-          className=" w-14 h-14 !inline-flex flex flex-row p-4 h-full hover:bg-[#1F1F1F] cursor-pointer"
+          className=" w-14 !inline-flex flex-row p-4 h-full hover:bg-[#1F1F1F] cursor-pointer"
           onClick={() => {
             setOpenSubNav(true);
           }}

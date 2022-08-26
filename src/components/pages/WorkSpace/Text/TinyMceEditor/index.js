@@ -4,6 +4,8 @@ import React, { useState, useRef } from "react";
 // eslint-disable-next-line no-unused-vars
 import { Editor } from "@tinymce/tinymce-react";
 
+// eslint-disable-next-line no-unused-vars
+import tinymce from "tinymce";
 import "tinymce/skins/ui/oxide-dark/skin.css";
 
 import "tinymce/models/dom/model";
