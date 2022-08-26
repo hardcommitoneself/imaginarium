@@ -137,7 +137,7 @@ export default function NewProject() {
                 DREAM CAST
               </label>
               <div className="mt-1">
-                <div className="flex flex-col justify-center items-center justify-between w-20 h-28 cursor-pointer">
+                <div className="flex flex-col justify-center items-center w-20 h-28 cursor-pointer">
                   <button className="flex justify-center items-center border border-[#404040] w-20 h-20 rounded-[40px] outline-none">
                     <BigPlusButtonIcon />
                   </button>
@@ -189,7 +189,7 @@ export default function NewProject() {
                 SIMILAR MOVIES
               </label>
               <div className="mt-1">
-                <button className="flex flex-col justify-center items-center justify-between w-20 h-[132px] outline-none">
+                <button className="flex flex-col justify-center items-center w-20 h-[132px] outline-none">
                   <div className="flex justify-center items-center border border-[#404040] w-20 h-[100px] rounded-[4px]">
                     <BigPlusButtonIcon />
                   </div>
