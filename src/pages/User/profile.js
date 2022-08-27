@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 // link
 import moment from "https://cdn.skypack.dev/moment?min";
 // css
-import "../github.scss";
+import "../../github.scss";
 // context
-import { AuthContext } from "./context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 // core components
-import InputText from "../components/core/common/InputText";
-import ProfileTable from "../components/core/table/ProfileTable";
+import InputText from "../../components/core/common/InputText";
+import ProfileTable from "../../components/core/table/ProfileTable";
 
 const DayNames = {
   0: "SUN",

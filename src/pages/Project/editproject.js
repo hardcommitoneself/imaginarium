@@ -1,17 +1,17 @@
 import * as React from "react";
 // core components
-import InputText from "../components/core/common/InputText";
-import Genres from "../components/core/chip/Genres";
-import Tag from "../components/core/chip/Tag";
-import DreamCast from "../components/core/chip/DreamCast";
-import SimilarMovie from "../components/core/chip/SimilarMovie";
+import InputText from "../../components/core/common/InputText";
+import Genres from "../../components/core/chip/Genres";
+import Tag from "../../components/core/chip/Tag";
+import DreamCast from "../../components/core/chip/DreamCast";
+import SimilarMovie from "../../components/core/chip/SimilarMovie";
 
 import {
   BigPlusButtonIcon,
   DropDownIcon,
   SmallPlusButtonIcon,
   LoglinePlusIcon,
-} from "../components/Svg";
+} from "../../components/Svg";
 
 export default function EditProject() {
   const [projectType, setProjectType] = React.useState(1);
@@ -157,7 +157,7 @@ export default function EditProject() {
                     >
                       THRILLER
                     </Genres>
-                    <button className="mr-2 mb-2 flex justify-center items-center justify-between w-auto h-6 rounded-[15px] px-1 py-0.5 border border-[#404040] outline-none">
+                    <button className="mr-2 mb-2 flex justify-center items-center w-auto h-6 rounded-[15px] px-1 py-0.5 border border-[#404040] outline-none">
                       <SmallPlusButtonIcon />
                     </button>
                   </div>
@@ -185,7 +185,7 @@ export default function EditProject() {
                       alt="dreamcast3"
                       name="Keanu Reeves"
                     />
-                    <div className="mr-4 mb-2 flex flex-col justify-center items-center justify-between w-20 h-28 outline-none">
+                    <div className="mr-4 mb-2 flex flex-col justify-center items-center w-20 h-28 outline-none">
                       <button className="flex justify-center items-center border border-[#404040] w-20 h-20 rounded-[40px] outline-none">
                         <BigPlusButtonIcon />
                       </button>
@@ -236,7 +236,7 @@ export default function EditProject() {
                     <Tag>Thriller</Tag>
                     <Tag>Speeding</Tag>
                     <Tag>Fantasy</Tag>
-                    <button className="mr-2 mb-2 flex justify-center items-center justify-between w-auto h-6 rounded-[15px] px-1 py-0.5 border border-[#404040] outline-none">
+                    <button className="mr-2 mb-2 flex justify-center items-center w-auto h-6 rounded-[15px] px-1 py-0.5 border border-[#404040] outline-none">
                       <SmallPlusButtonIcon />
                     </button>
                   </div>
@@ -264,7 +264,7 @@ export default function EditProject() {
                       alt="movie3"
                       name="Three Palmes"
                     />
-                    <div className="mr-4 mb-2 flex flex-col justify-center items-center justify-between w-20 h-[132px] outline-none">
+                    <div className="mr-4 mb-2 flex flex-col justify-center items-center w-20 h-[132px] outline-none">
                       <button className="flex justify-center items-center border border-[#404040] w-20 h-[100px] rounded-[4px]">
                         <BigPlusButtonIcon />
                       </button>

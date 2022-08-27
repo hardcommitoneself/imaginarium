@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 
-import { MenuBar } from "../components/pages/WorkSpace/MenuBar";
-import TinyMceEditor from "../components/pages/WorkSpace/Text/TinyMceEditor";
-import ToolBar from "../components/pages/WorkSpace/Toolbar";
+import { MenuBar } from "../../components/pages/WorkSpace/MenuBar";
+import TinyMceEditor from "../../components/pages/WorkSpace/Text/TinyMceEditor";
+import ToolBar from "../../components/pages/WorkSpace/Toolbar";
 
-import "../basicStyle.css";
+import "../../basicStyle.css";
 
 export default function WorkSpace() {
   const [state, setState] = useState({
