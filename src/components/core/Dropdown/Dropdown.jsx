@@ -9,7 +9,7 @@ export const Dropdown = (props) => {
   const [openDropdown, setOpenDropdown] = React.useState(false);
 
   return (
-    <div className="dropdown w-[47.5%]">
+    <div className="dropdown">
       <div
         tabIndex="0"
         className="px-2 py-1.5 h-8 bg-[#161616] border border-[#404040] rounded-[4px]"
