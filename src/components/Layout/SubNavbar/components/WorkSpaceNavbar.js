@@ -1,5 +1,8 @@
 import * as React from "react";
 
+// project context
+import { ProjectContext } from "../../../../pages/context/ProjectContext";
+
 import MainSubNavbar from "./MainSubNavbar";
 
 import RoleChooser from "../../../core/common/RoleChooser";
@@ -32,6 +35,9 @@ import {
 } from "../../../Svg";
 
 export default function WorkSpaceNavbar() {
+  const { currentProjectType, setCurrentProjectType } =
+    React.useContext(ProjectContext);
+
   function toggleMenu() {
     var menu = document.getElementById("menu");
 
@@ -99,7 +105,7 @@ export default function WorkSpaceNavbar() {
     },
   ];
 
-  const [projectType, setProjectType] = React.useState(1);
+  // const [projectType, setProjectType] = React.useState(1);
   const [isOpenScript, setOpenScript] = React.useState(false);
   const [isOpenPage, setOpenPage] = React.useState(false);
   const [isHeaderPhoneModal, setHeaderPhoneModal] = React.useState(false);
@@ -191,10 +197,10 @@ export default function WorkSpaceNavbar() {
           <button
             className={
               "!inline-flex flex-row p-4 space-x-2 h-full cursor-pointer  outline-none	items-center " +
-              (projectType === 1 ? "bg-black-rgba" : "bg-[#0E0E0E]")
+              (currentProjectType === 1 ? "bg-black-rgba" : "bg-[#0E0E0E]")
             }
             onClick={() => {
-              setProjectType(1);
+              setCurrentProjectType(1);
             }}
           >
             <TextSearchIcon />
@@ -203,10 +209,10 @@ export default function WorkSpaceNavbar() {
           <button
             className={
               "!inline-flex flex-row p-4 space-x-2 h-full cursor-pointer  outline-none items-cen+ter " +
-              (projectType === 2 ? "bg-black-rgba" : "bg-[#0E0E0E]")
+              (currentProjectType === 2 ? "bg-black-rgba" : "bg-[#0E0E0E]")
             }
             onClick={() => {
-              setProjectType(2);
+              setCurrentProjectType(2);
             }}
           >
             <CharacterSearchIcon />
@@ -215,10 +221,10 @@ export default function WorkSpaceNavbar() {
           <button
             className={
               "flex flex-row p-4 space-x-2 h-full cursor-pointer  outline-none items-center " +
-              (projectType === 3 ? "bg-black-rgba" : "bg-[#0E0E0E]")
+              (currentProjectType === 3 ? "bg-black-rgba" : "bg-[#0E0E0E]")
             }
             onClick={() => {
-              setProjectType(3);
+              setCurrentProjectType(3);
             }}
           >
             <LocationSearchIcon />

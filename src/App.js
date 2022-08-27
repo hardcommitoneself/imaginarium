@@ -2,7 +2,7 @@ import * as React from "react";
 import { BrowserRouter as Router, useRoutes } from "react-router-dom";
 import "./App.css";
 
-// auth context
+// context
 import { AuthContext } from "./pages/context/AuthContext";
 import { ProjectContext } from "./pages/context/ProjectContext";
 
@@ -37,11 +37,20 @@ function App() {
 const AppWrapper = () => {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
   const [selected, setSelected] = React.useState("");
+  const [currentProjectType, setCurrentProjectType] = React.useState(1);
   const value = React.useMemo(
     () => ({ isAuthenticated, setIsAuthenticated }),
     [isAuthenticated]
   );
-  const project = React.useMemo(() => ({ selected, setSelected }), [selected]);
+  const project = React.useMemo(
+    () => ({
+      currentProjectType,
+      selected,
+      setCurrentProjectType,
+      setSelected,
+    }),
+    [currentProjectType, selected]
+  );
 
   return (
     <Router>
