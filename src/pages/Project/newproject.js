@@ -214,10 +214,10 @@ export default function NewProject() {
                 SCENES PER ACT
               </label>
 
-              <div className="flex flex-row w-full justify-between">
+              <div className="grid grid-cols-2 gap-2 w-full justify-between">
                 <Dropdown menus={acts} />
 
-                <div className="flex bg-[#161616] border border-[#404040] h-8 px-1 py-1.5 w-[47.5%] rounded-md">
+                <div className="flex bg-[#161616] border border-[#404040] h-8 px-1 py-1.5 rounded-md">
                   <div className="flex w-full items-center justify-between">
                     <input
                       className="px-2 py-1.5 w-3/4 h-6 bg-transparent ring-offset-0 border-[#161616] text-center focus:border-[#161616] focus:outline-none placeholder-[#5F5F5F] rounded-md text-[12px] text-white"
