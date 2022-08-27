@@ -1,18 +1,20 @@
 import * as React from "react";
 
+// icons
 import {
-  DropDownIcon,
   SmallPlusButtonIcon,
   BigPlusButtonIcon,
   LoglinePlusIcon,
 } from "../../components/Svg";
+
 // core components
 import InputText from "../../components/core/common/InputText";
+import { Dropdown } from "../../components/core/Dropdown";
+
+const acts = ["School 1", "School 2", "School 3", "Custom"];
 
 export default function NewProject() {
   const [projectName, setProjectName] = React.useState("");
-  const [initAct, setInitAct] = React.useState("School1");
-  const [openAct, setOpenAct] = React.useState(false);
   const [initScene, setInitScene] = React.useState("");
   const [showUpload, setShowUpload] = React.useState(true);
   const [projectType, setProjectType] = React.useState(1);
@@ -213,71 +215,7 @@ export default function NewProject() {
               </label>
 
               <div className="flex flex-row w-full justify-between">
-                <div className="dropdown w-[47.5%]">
-                  <div
-                    tabIndex="0"
-                    className="px-2 py-1.5 h-8 bg-[#161616] border border-[#404040] rounded-[4px]"
-                    name="projects"
-                    id="projects"
-                    onClick={() => {
-                      setOpenAct(true);
-                    }}
-                  >
-                    <div className="flex justify-between">
-                      <label className="text-center text-white text-[12px] leading-5">
-                        {initAct}
-                      </label>
-
-                      <button>
-                        <DropDownIcon />
-                      </button>
-                    </div>
-                  </div>
-
-                  {openAct ? (
-                    <ul
-                      tabIndex="0"
-                      className="drop-shadow-[0_15px_15px_rgba(255,255,255,0.2)] menu menu-compact dropdown-content mt-3 shadow bg-[#161616] border border-[#464646] w-full h-32 rounded-[4px]"
-                    >
-                      <li
-                        className="flex flex-row px-2 py-1.5 h-8 text-center text-white text-[12px] leading-5 border-b border-[#464646] hover:bg-[#5D5D5D]"
-                        onClick={() => {
-                          setInitAct("School 1");
-                          setOpenAct(false);
-                        }}
-                      >
-                        School 1
-                      </li>
-                      <li
-                        className="flex flex-row px-2 py-1.5 h-8 text-center text-white text-[12px] leading-5 border-b border-[#464646] hover:bg-[#5D5D5D]"
-                        onClick={() => {
-                          setInitAct("School 2");
-                          setOpenAct(false);
-                        }}
-                      >
-                        School 2
-                      </li>
-                      <li
-                        className="flex flex-row px-2 py-1.5 h-8 text-center text-white text-[12px] leading-5 border-b border-[#464646] hover:bg-[#5D5D5D]"
-                        onClick={() => {
-                          setInitAct("School 3");
-                          setOpenAct(false);
-                        }}
-                      >
-                        School 3
-                      </li>
-                      <li
-                        className="flex flex-row px-2 py-1.5 h-8 text-center text-white text-[12px] leading-5 border-b border-[#464646] hover:bg-[#5D5D5D]"
-                        onClick={() => {
-                          setInitAct("Custom");
-                          setOpenAct(false);
-                        }}
-                      >
-                        Custom
-                      </li>
-                    </ul>
-                  ) : null}
-                </div>
+                <Dropdown menus={acts} />
 
                 <div className="flex bg-[#161616] border border-[#404040] h-8 px-1 py-1.5 w-[47.5%] rounded-md">
                   <div className="flex w-full items-center justify-between">
