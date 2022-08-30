@@ -18,7 +18,13 @@ import CharacterBoardWrapper from "./components/CharacterBoardWrapper";
 import CharacterSide from "./components/CharacterSide";
 
 // svg
-import { BigPlusButtonIcon, LaurelA, LaurelB } from "../../../Svg";
+import {
+  BigPlusButtonIcon,
+  LaurelA,
+  LaurelB,
+  CameraIcon,
+  ArrowLeftIcon,
+} from "../../../Svg";
 
 const acts = ["Act 1", "Act 2", "Act 3", "Custom"];
 const scenes = ["scene 1", "scene 2", "scene 3", "Custom"];
@@ -183,10 +189,39 @@ export default function CharacterEditor(props) {
             handleSetCurrentSide={setCSide}
           />
         </div>
+
+        <div className="px-6 py-4">
+          <div className="flex gap-3">
+            <label className="flex-none w-[78px] uppercase leading-5 text-[9px] text-white tracking-[.25em]">
+              Photo
+            </label>
+            <label className="flex-1 uppercase leading-5 text-[9px] text-white tracking-[.25em]">
+              Action Name
+            </label>
+          </div>
+          <div className="grid grid-rows-2 grid-flow-col gap-3">
+            <div className="row-span-2 flex flex-col">
+              <div className="flex justify-center h-full items-center bg-black border border-[#404040] ring-offset-0 focus:border-white focus:outline-none rounded-md cursor-pointer">
+                <CameraIcon />
+              </div>
+            </div>
+            <div className="col-span-2">
+              <Input name="actor" placeholder="Ex. Keanu Reeves" />
+            </div>
+            <div className="group relative col-span-2 h-8 flex items-center justify-center gap-[6px] pr-3 py-[6px] pl-[6px] rounded border border-[#404040] hover:bg-gray-500/30">
+              <label className="flex-1 text-center uppercase leading-5 text-[10px] text-white tracking-[.25em] group-hover:cursor-pointer">
+                Look Up
+              </label>
+              <div className="absolute right-[6px] items-center justify-center group-hover:cursor-pointer">
+                <ArrowLeftIcon />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }, [cSide]);
-  
+
   return (
     <CharacterEditorWrapper>
       <ActSceneSelectWrapper>
