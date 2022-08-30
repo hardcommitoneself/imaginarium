@@ -47,6 +47,7 @@ export default function WorkSpace() {
         <TinyMceEditor state={state} setState={setState} />
       )}
       {currentProjectType === 2 && <CharacterEditor />}
+      {currentProjectType === 3 && <div className="flex-auto" />}
       <ToolBar state={state} setState={setState} />
     </div>
   );
