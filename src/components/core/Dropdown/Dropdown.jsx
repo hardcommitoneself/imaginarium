@@ -4,12 +4,17 @@ import * as React from "react";
 import { DropDownIcon } from "../../Svg";
 
 export const Dropdown = (props) => {
-  const { menus } = props;
+  const { menus, label } = props;
   const [currentMenu, setCurrentMenu] = React.useState(menus[0]);
   const [openDropdown, setOpenDropdown] = React.useState(false);
 
   return (
     <div className="dropdown">
+      {label && (
+        <label className="flex flex-start uppercase leading-5 text-[9px] text-white tracking-[.25em]">
+          {label}
+        </label>
+      )}
       <div
         tabIndex="0"
         className="px-2 py-1.5 h-8 bg-[#161616] border border-[#404040] rounded-[4px]"
@@ -33,7 +38,7 @@ export const Dropdown = (props) => {
       {openDropdown ? (
         <ul
           tabIndex="0"
-          className="drop-shadow-[0_15px_15px_rgba(255,255,255,0.2)] menu menu-compact dropdown-content mt-3 shadow bg-[#161616] border border-[#464646] w-full h-32 rounded-[4px]"
+          className="drop-shadow-[0_15px_15px_rgba(255,255,255,0.2)] menu menu-compact dropdown-content mt-3 shadow bg-[#161616] border border-[#464646] w-full rounded-[4px]"
         >
           {menus &&
             menus.map((menu, index) => (

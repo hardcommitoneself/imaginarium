@@ -1,7 +1,10 @@
 import * as React from "react";
 
 // core components
+import { PrimaryButton } from "../../../core/Button";
 import { Dropdown } from "../../../core/Dropdown/Dropdown";
+import Modal from "../../../core/Modal/Modal";
+import { Input } from "../../../core/Input";
 
 // components
 import CharacterEditorWrapper from "./components/CharacterEditorWrapper";
@@ -12,12 +15,16 @@ import LeaderCard from "./components/LeaderCard";
 import PrimaryAvatar from "./components/Avatar/PrimaryAvatar";
 import SecondaryAvatar from "./components/Avatar/SecondaryAvatar";
 import CharacterBoardWrapper from "./components/CharacterBoardWrapper";
+import CharacterSide from "./components/CharacterSide";
 
 // svg
 import { BigPlusButtonIcon, LaurelA, LaurelB } from "../../../Svg";
 
 const acts = ["Act 1", "Act 2", "Act 3", "Custom"];
 const scenes = ["scene 1", "scene 2", "scene 3", "Custom"];
+const gender = ["Male", "Female"];
+const races = ["white", "black"];
+const sides = ["protagonist", "antagonist", "neutral"];
 
 // TODO: should get relation from DB
 const relations = [
@@ -146,6 +153,40 @@ const characters = [
 ];
 
 export default function CharacterEditor(props) {
+  const [showNewCharacterModal, setShowNewCharacterModal] =
+    React.useState(false);
+  const [cSide, setCSide] = React.useState(0);
+
+  const NewCharacterModalFooter = React.useMemo(() => {
+    return (
+      <div className="flex justify-end">
+        <PrimaryButton label="ADD" handleClick={() => {}} />
+      </div>
+    );
+  }, []);
+
+  const NewCharacterModalBody = React.useMemo(() => {
+    return (
+      <div className="flex flex-col divide-y divide-[#161616] min-h-[450px] overflow-hidden">
+        <div className="grid grid-cols-2 px-6 py-4 gap-3">
+          <Input label="Name" name="name" placeholder="Ex. John Wick" />
+          <Dropdown label="Gender" menus={gender} />
+          <Input label="Age" name="age" placeholder="Ex. John Wick" />
+          <Dropdown label="Race" menus={races} />
+        </div>
+
+        <div className="px-6 py-4 gap-3">
+          <CharacterSide
+            label="Character Side"
+            items={sides}
+            currentSide={cSide}
+            handleSetCurrentSide={setCSide}
+          />
+        </div>
+      </div>
+    );
+  }, [cSide]);
+
   return (
     <CharacterEditorWrapper>
       <ActSceneSelectWrapper>
@@ -172,7 +213,10 @@ export default function CharacterEditor(props) {
 
       <AddCharacterWrapper>
         <div className="flex flex-col justify-center items-center gap-1">
-          <button className="flex justify-center items-center border border-[#404040] w-20 h-20 rounded-[40px] outline-none">
+          <button
+            className="flex justify-center items-center border border-[#404040] w-20 h-20 rounded-[40px] outline-none"
+            onClick={() => setShowNewCharacterModal(true)}
+          >
             <BigPlusButtonIcon />
           </button>
 
@@ -215,6 +259,16 @@ export default function CharacterEditor(props) {
           </div>
         ))}
       </CharacterBoardWrapper>
+
+      {/* Modals */}
+      {showNewCharacterModal && (
+        <Modal
+          title="New Characters"
+          handleClose={() => setShowNewCharacterModal(false)}
+          body={NewCharacterModalBody}
+          footer={NewCharacterModalFooter}
+        />
+      )}
     </CharacterEditorWrapper>
   );
 }
