@@ -41,7 +41,7 @@ export default function WorkSpace() {
   });
 
   return (
-    <div className="flex justify-between bg-[#0A0A0A]">
+    <div className="flex items-stretch bg-[#0A0A0A]">
       <MenuBar />
       {currentProjectType === 1 && (
         <TinyMceEditor state={state} setState={setState} />
