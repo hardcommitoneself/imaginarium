@@ -4,7 +4,7 @@ import * as React from "react";
 import { PrimaryButton } from "../../../core/Button";
 import { Dropdown } from "../../../core/Dropdown/Dropdown";
 import Modal from "../../../core/Modal/Modal";
-import { Input } from "../../../core/Input";
+import { Input, TextArea } from "../../../core/Input";
 
 // components
 import CharacterEditorWrapper from "./components/CharacterEditorWrapper";
@@ -173,7 +173,7 @@ export default function CharacterEditor(props) {
 
   const NewCharacterModalBody = React.useMemo(() => {
     return (
-      <div className="flex flex-col divide-y divide-[#161616] min-h-[450px] overflow-hidden">
+      <div className="flex flex-col divide-y divide-[#161616] max-h-[450px] overflow-scroll">
         <div className="grid grid-cols-2 px-6 py-4 gap-3">
           <Input label="Name" name="name" placeholder="Ex. John Wick" />
           <Dropdown label="Gender" menus={gender} />
@@ -217,6 +217,29 @@ export default function CharacterEditor(props) {
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="px-6 py-4">
+          <TextArea label="Role" placeholder="Once time in a galaxy..." />
+        </div>
+
+        <div className="px-6 py-4">
+          <TextArea label="Ethnicity" placeholder="Once time in a galaxy..." />
+        </div>
+
+        <div className="px-6 py-4">
+          <TextArea
+            label="Orientation"
+            placeholder="Once time in a galaxy..."
+          />
+        </div>
+
+        <div className="px-6 py-4">
+          <TextArea label="Disability" placeholder="Once time in a galaxy..." />
+        </div>
+
+        <div className="px-6 py-4">
+          <TextArea label="Occupation" placeholder="Once time in a galaxy..." />
         </div>
       </div>
     );
