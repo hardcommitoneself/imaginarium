@@ -186,7 +186,7 @@ export default function CharacterEditor(props) {
       </div>
     );
   }, [cSide]);
-
+  
   return (
     <CharacterEditorWrapper>
       <ActSceneSelectWrapper>

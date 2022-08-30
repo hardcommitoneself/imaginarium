@@ -3,7 +3,7 @@ import * as React from "react";
 // icons
 import { DropDownIcon } from "../../Svg";
 
-export const Dropdown = (props) => {
+export const Dropdown = (props) => 
   const { menus, label } = props;
   const [currentMenu, setCurrentMenu] = React.useState(menus[0]);
   const [openDropdown, setOpenDropdown] = React.useState(false);
