@@ -1,4 +1,5 @@
 import PrimaryLink from "./PrimaryLink";
 import SecondaryLink from "./SecondaryLink";
+import PrimaryButton from "./PrimaryButton";
 
-export { PrimaryLink, SecondaryLink };
+export { PrimaryLink, SecondaryLink, PrimaryButton };
