@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 
+// project context
+import { ProjectContext } from "../context/ProjectContext";
+
+// page components
 import { MenuBar } from "../../components/pages/WorkSpace/MenuBar";
-import TinyMceEditor from "../../components/pages/WorkSpace/Text/TinyMceEditor";
 import ToolBar from "../../components/pages/WorkSpace/Toolbar";
+import CharacterEditor from "../../components/pages/WorkSpace/CharacterEditor";
+import TinyMceEditor from "../../components/pages/WorkSpace/Text/TinyMceEditor";
 
 import "../../basicStyle.css";
 
 export default function WorkSpace() {
+  const { currentProjectType } = React.useContext(ProjectContext);
+
   const [state, setState] = useState({
     editorState: "<p>Hello World</p>",
     selectedContent: "",
@@ -36,7 +43,10 @@ export default function WorkSpace() {
   return (
     <div className="flex justify-between bg-[#0A0A0A]">
       <MenuBar />
-      <TinyMceEditor state={state} setState={setState} />
+      {currentProjectType === 1 && (
+        <TinyMceEditor state={state} setState={setState} />
+      )}
+      {currentProjectType === 2 && <CharacterEditor />}
       <ToolBar state={state} setState={setState} />
     </div>
   );
