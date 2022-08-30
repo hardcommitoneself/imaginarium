@@ -35,14 +35,29 @@ export default function SecondaryAvatar(props) {
         </div>
         <div className="relative w-full flex justify-center">
           <div
-            className={`w-20 h-20 self-center flex items-center justify-center bg-[#2B2B2B] ${
+            className={`w-10 h-10 2xl:w-20 2xl:h-20 self-center flex items-center justify-center bg-[#2B2B2B] ${
               url === "" && "ring-[1px] ring-gray-600"
             } rounded-full overflow-hidden ${
               brand ? "ring ring-purple-500" : ""
             }`}
           >
             {url ? (
-              <img src={url} alt="avatar" width={80} height={80} />
+              <>
+                <img
+                  src={url}
+                  alt="avatar"
+                  className="hidden 2xl:block"
+                  width={80}
+                  height={80}
+                />
+                <img
+                  src={url}
+                  alt="avatar"
+                  className="block 2xl:hidden"
+                  width={40}
+                  height={40}
+                />
+              </>
             ) : (
               <span className=" uppercase text-center text-[10px] font-bold tracking-[.15rem]">
                 {name.split(" ")[0][0] + name.split(" ")[1][0]}
