@@ -13,7 +13,16 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     width: dimensions.width,
     height: dimensions.height,
+    minWidth: 1250,
+    minHeight: 700,
     show: false,
+    // titleBarStyle: 'customButtonsOnHover',
+    // titleBarOverlay: true,
+    // titleBarOverlay: {
+    //   color: '#2f3241',
+    //   symbolColor: '#74b1be',
+    //   height: 50
+    // },
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },

@@ -10,7 +10,7 @@ export default function TextArea(props) {
 
       <textarea
         name="synopsis"
-        className="px-2 py-1.5 w-full h-20 bg-[#161616] border border-[#404040] focus:border-white placeholder-[#5F5F5F] focus:outline-none rounded-md text-[12px] focus:ring-1 text-white"
+        className="px-2 py-1.5 w-full h-20 bg-[#0E0E0E] border border-[#404040] focus:border-white placeholder-[#5F5F5F] focus:outline-none rounded-md text-[12px] focus:ring-1 text-white"
         placeholder={placeholder}
       />
     </div>

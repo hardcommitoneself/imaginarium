@@ -11,13 +11,13 @@ export const Dropdown = (props) => {
   return (
     <div className="dropdown">
       {label && (
-        <label className="flex flex-start uppercase leading-5 text-[9px] text-white tracking-[.25em]">
+        <label className="flex flex-start font-extrabold uppercase leading-5 text-[9px] text-white tracking-[.21em]">
           {label}
         </label>
       )}
       <div
         tabIndex="0"
-        className="px-2 py-1.5 h-8 bg-[#161616] border border-[#404040] rounded-[4px]"
+        className="px-2 py-1.5 h-8 bg-[#0E0E0E] border border-[#404040] rounded-[4px]"
         name="projects"
         id="projects"
         onClick={() => {
@@ -38,7 +38,7 @@ export const Dropdown = (props) => {
       {openDropdown ? (
         <ul
           tabIndex="0"
-          className="drop-shadow-[0_15px_15px_rgba(255,255,255,0.2)] menu menu-compact dropdown-content mt-3 shadow bg-[#161616] border border-[#464646] w-full rounded-[4px]"
+          className="drop-shadow-[0_15px_15px_rgba(255,255,255,0.2)] menu menu-compact dropdown-content mt-1 shadow bg-[#0E0E0E] border-x border-t border-[#464646] w-full rounded-[4px]"
         >
           {menus &&
             menus.map((menu, index) => (

@@ -15,6 +15,10 @@ import ToolbarWrapper from "./components/ToolbarWrapper";
 import OptionalSection from "./OptionalSection";
 import CommentSection from "./CommentSection";
 import VoiceSection from "./VoiceSection";
+import ProjectInformationSection from "./ProjectInformationSection";
+import ProjectEditSection from "./ProjectEditSection";
+import LocationInformationSection from "./LocationInformationSection";
+import LocationEditSection from "./LocationEditSection";
 
 // project context
 import { ProjectContext } from "../../../../pages/context/ProjectContext";
@@ -39,7 +43,7 @@ const ToolBar = (props) => {
     <ToolbarWrapper>
       {currentProjectType === 1 && (
         <>
-          <div className="tabs w-[24rem] border-b border-[#262626] pt-2">
+          <div className="tabs w-[327px] border-b border-[#262626] pt-2">
             <div className={tabClass(0)} onClick={handleClick(0)}>
               <ShuffleIcon />
             </div>
@@ -53,8 +57,8 @@ const ToolBar = (props) => {
               <VoiceMemo />
             </div>
           </div>
-          <div className="w-[24rem] max-h-[calc(100vh-154px)] ">
-            {value === 0 && <div></div>}
+          <div className="w-[327px] max-h-[calc(100vh-154px)] ">
+            {value === 0 && <></> }
             {value === 1 && (
               <OptionalSection state={state} setState={setState} />
             )}
@@ -65,7 +69,35 @@ const ToolBar = (props) => {
       )}
       {currentProjectType === 2 && (
         <>
-          <div className="tabs w-[24rem] border-b border-[#262626] pt-2">
+          <div className="tabs w-[327px] border-b border-[#262626] pt-2">
+            <div className={tabClass(0)} onClick={handleClick(0)}>
+              <PieChartIcon />
+            </div>
+            <div className={tabClass(1)} onClick={
+              handleClick(1)
+            }>
+              <OptionVerticalIcon />
+            </div>
+            <div className={tabClass(2)} onClick={handleClick(2)}>
+              <MsgCircle />
+            </div>
+            <div className={tabClass(3)} onClick={handleClick(3)}>
+              <VoiceMemo />
+            </div>
+          </div>
+          <div className="w-[327px] max-h-[calc(100vh-154px)] ">
+            {value === 0 && <ProjectInformationSection />}
+            {value === 1 && (
+              <ProjectEditSection actorInfo = {props.actorInfo} />
+            )}
+            {value === 2 && <CommentSection />}
+            {value === 3 && <VoiceSection />}
+          </div>
+        </>
+      )}
+       {currentProjectType === 3 && (
+        <>
+          <div className="tabs w-[327px] border-b border-[#262626] pt-2">
             <div className={tabClass(0)} onClick={handleClick(0)}>
               <PieChartIcon />
             </div>
@@ -78,6 +110,14 @@ const ToolBar = (props) => {
             <div className={tabClass(3)} onClick={handleClick(3)}>
               <VoiceMemo />
             </div>
+          </div>
+          <div className="w-[327px] max-h-[calc(100vh-154px)] ">
+            {value === 0 && <LocationInformationSection />}
+            {value === 1 && (
+              <LocationEditSection />
+            )}
+            {value === 2 && <CommentSection />}
+            {value === 3 && <VoiceSection />}
           </div>
         </>
       )}

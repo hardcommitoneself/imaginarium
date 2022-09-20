@@ -22,14 +22,13 @@ import {
   BigPlusButtonIcon,
   LaurelA,
   LaurelB,
-  CameraIcon,
   ArrowLeftIcon,
 } from "../../../Svg";
 
 const acts = ["Act 1", "Act 2", "Act 3", "Custom"];
 const scenes = ["scene 1", "scene 2", "scene 3", "Custom"];
 const gender = ["Male", "Female"];
-const races = ["white", "black"];
+const races = ["White", "Black", "Asian"];
 const sides = ["protagonist", "antagonist", "neutral"];
 
 // TODO: should get relation from DB
@@ -158,6 +157,15 @@ const characters = [
   ],
 ];
 
+function loadFile(event) {
+  const image = document.getElementById("output");
+  console.log("image" + image);
+  image.src = URL.createObjectURL(event.target.files[0]);
+  if (image.src !== null) {
+    // setShowUpload(false);
+  }
+}
+
 export default function CharacterEditor(props) {
   const [showNewCharacterModal, setShowNewCharacterModal] =
     React.useState(false);
@@ -177,7 +185,7 @@ export default function CharacterEditor(props) {
         <div className="grid grid-cols-2 px-6 py-4 gap-3">
           <Input label="Name" name="name" placeholder="Ex. John Wick" />
           <Dropdown label="Gender" menus={gender} />
-          <Input label="Age" name="age" placeholder="Ex. John Wick" />
+          <Input label="Age" name="age" placeholder="Ex. 40" />
           <Dropdown label="Race" menus={races} />
         </div>
 
@@ -195,27 +203,40 @@ export default function CharacterEditor(props) {
             <label className="flex-none w-[78px] uppercase leading-5 text-[9px] text-white tracking-[.25em]">
               Photo
             </label>
-            <label className="flex-1 uppercase leading-5 text-[9px] text-white tracking-[.25em]">
+            <label className="flex uppercase leading-5 text-[9px] text-white tracking-[.25em]">
               Action Name
             </label>
           </div>
-          <div className="grid grid-rows-2 grid-flow-col gap-3">
-            <div className="row-span-2 flex flex-col">
-              <div className="flex justify-center h-full items-center bg-black border border-[#404040] ring-offset-0 focus:border-white focus:outline-none rounded-md cursor-pointer">
-                <CameraIcon />
+          <div className="flex">
+            <div className="img-upload">
+              <input
+                type="file"
+                className="hidden"
+                name="image"
+                id="file"
+                onChange={loadFile}
+              />
+              <div className="w-[72px] h-[72px] bg-[#0E0E0E] border border-[#404040] ring-offset-0 focus:border-white focus:outline-none rounded-md cursor-pointer">
+                <label htmlFor="file" className="cursor-pointer">
+                  <img
+                    id="output"
+                    className="w-[72px] h-[72px]"
+                    src="assets/img/Workspace/image-upload.png"
+                    alt="logo"
+                  />
+                </label>
               </div>
             </div>
-            <div className="col-span-2">
+            <div className="pl-1.5 flex flex-col w-full gap-y-2">
               <Input name="actor" placeholder="Ex. Keanu Reeves" />
-            </div>
-            <div className="group relative col-span-2 h-8 flex items-center justify-center gap-[6px] pr-3 py-[6px] pl-[6px] rounded border border-[#404040] hover:bg-gray-500/30">
-              <label className="flex-1 text-center uppercase leading-5 text-[10px] text-white tracking-[.25em] group-hover:cursor-pointer">
+              <div className="group relative col-span-2 h-8 flex items-center justify-center gap-x-2 pr-3 py-[6px] pl-[6px] rounded border border-[#404040] hover:bg-blue-rgba-24 cursor-pointer">
+              <label className="text-center uppercase leading-5 text-[10px] text-white tracking-[.25em] cursor-pointer ">
                 Look Up
               </label>
-              <div className="absolute right-[6px] items-center justify-center group-hover:cursor-pointer">
-                <ArrowLeftIcon />
-              </div>
+              <ArrowLeftIcon />
             </div>
+            </div>
+            
           </div>
         </div>
 
@@ -254,14 +275,14 @@ export default function CharacterEditor(props) {
 
       <TopWrapper>
         <LeaderCard
-          bg="assets/img/workspace/leadA.png"
+          type="Protagonist"
           name="John Wick"
           laurel={<LaurelA />}
           avatar={<PrimaryAvatar url="assets/img/dashboard/dreamcast1.png" />}
           direction="left"
         />
         <LeaderCard
-          bg="assets/img/workspace/leadB.png"
+          type="Antagonist"
           name="Adam Milton"
           laurel={<LaurelB />}
           avatar={<PrimaryAvatar url="assets/img/dashboard/dreamcast4.png" />}
@@ -295,7 +316,7 @@ export default function CharacterEditor(props) {
                 <div key={index} className="col-span-11 h-4 mb-2">
                   <div className="grid grid-cols-11 h-4">
                     <div className={`${relation.span} text-center`}>
-                      <span className="uppercase text-[9px] font-bold leading-3 tracking-[.21rem]">
+                      <span className="uppercase text-[#5F5F5F] text-[9px] font-bold leading-3 tracking-[.21rem]">
                         {relation.relation}
                       </span>
                     </div>
@@ -312,12 +333,13 @@ export default function CharacterEditor(props) {
                 url={row.url}
                 name={row.name}
                 brand={row.brand}
+                changeActorImage={props.changeActorImage}
+                changeActorName={props.changeActorName}
               />
             ))}
           </div>
         ))}
       </CharacterBoardWrapper>
-
       {/* Modals */}
       {showNewCharacterModal && (
         <Modal

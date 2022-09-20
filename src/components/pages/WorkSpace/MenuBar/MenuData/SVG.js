@@ -31,3 +31,20 @@ export const CharacterAdminBIcon = (
     />
   </svg>
 );
+
+export const MIcon = (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect x="0.5" y="0.5" width="19" height="19" rx="9.5" fill="#2B2B2B" />
+      <path
+        d="M6.71071 13V6.655H7.94371L10.1487 11.605H9.86071L12.0657 6.655H13.2897V13H12.0117V8.689H12.3717L10.4007 13H9.59071L7.61071 8.689H7.98871V13H6.71071Z"
+        fill="#CDCDCD"
+      />
+      <rect x="0.5" y="0.5" width="19" height="19" rx="9.5" stroke="#404040" />
+    </svg>
+);

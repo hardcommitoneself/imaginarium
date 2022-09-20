@@ -8,7 +8,7 @@ export default function CharacterSide(props) {
         {label}
       </label>
 
-      <div className="grid grid-cols-3 gap-2 p-1 w-full bg-black border border-[#404040] ring-offset-0 focus:border-white focus:outline-none rounded-md">
+      <div className="grid grid-cols-3 gap-2 p-1 w-full bg-[#0E0E0E] border border-[#404040] ring-offset-0 rounded-md">
         {items.map((item, index) => (
           <Item
             key={index}
@@ -28,7 +28,7 @@ const Item = (props) => {
   return (
     <div
       className={`uppercase px-2 py-1 text-[9px] text-white tracking-[.21rem] ${
-        active ? "bg-[#5F5F5F]" : ""
+        active ? "bg-blue-rgba-65" : ""
       } text-center rounded cursor-pointer`}
       onClick={() => handleSetCurrentSide(index)}
     >

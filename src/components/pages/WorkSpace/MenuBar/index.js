@@ -45,7 +45,7 @@ export const MenuBar = () => {
   }, [currentProjectType]);
 
   return (
-    <div className="w-[20rem] bg-[#161616] min-h-[calc(100vh-112px)] relative select-none ">
+    <div className="min-w-[20rem] bg-[#161616] min-h-[calc(100vh-112px)] relative select-none ">
       <div className="flex flex-col items-start pl-3 pt-3 pr-2 pb-3 border-b border-gray-600">
         <label className="flex flex-row justify-center items-center gap-4 px-1 py-2">
           <FileMenu />
@@ -62,7 +62,7 @@ export const MenuBar = () => {
           </label>
         </div>
       )}
-      <div className="flex flex-col gap-2 p-2 w-full max-h-[calc(100vh-270px)] overflow-y-auto">
+      <div className="flex flex-col gap-2 p-2 w-full max-h-[calc(100vh-210px)] overflow-y-auto">
         {getRootNodes(treeItem).map((node, index) => (
           <RenderTree
             node={node}
@@ -92,7 +92,7 @@ export const MenuBar = () => {
         </div>
       )}
       {isPaneOpen && (
-        <div className="absolute bottom-[0px] w-full overflow-scroll">
+        <div className="absolute bottom-[0px] w-full overflow-scroll  border-t-2 border-[#262626]">
           <div className="flex flex-col overflow-scroll">
             <div className="pl-3 pr-2 pb-1 h-8 bg-[#161616] flex items-center justify-between">
               <MsgSquare />
